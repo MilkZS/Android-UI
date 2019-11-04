@@ -12,7 +12,8 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".ui1.U1Activity">
+        <activity android:name=".ui1.U1Activity"></activity>
+        <activity android:name=".ui2.UI2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
