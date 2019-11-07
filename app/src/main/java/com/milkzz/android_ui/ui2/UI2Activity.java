@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
 import com.milkzz.android_ui.R;
@@ -16,6 +18,8 @@ import com.milkzz.android_ui.R;
 public class UI2Activity extends AppCompatActivity {
 
     MyTextView tv;
+    TextView tv1;
+    TextView tv2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,8 @@ public class UI2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_ui2);
 
         tv = findViewById(R.id.text);
+        tv1 = findViewById(R.id.text1);
+        tv2 = findViewById(R.id.text2);
 
         PropertyValuesHolder holder = PropertyValuesHolder.ofObject("CharText",new charEvaluator(),'A','Z');
         final ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(tv,holder);
@@ -31,7 +37,9 @@ public class UI2Activity extends AppCompatActivity {
 
         Keyframe keyframe1 = Keyframe.ofFloat(0f,0f);
         Keyframe keyframe2 = Keyframe.ofFloat(0.2f,-20f);
+        keyframe2.setInterpolator(new BounceInterpolator());
         Keyframe keyframe3 = Keyframe.ofFloat(1,0);
+        keyframe3.setInterpolator(new LinearInterpolator());
 
         PropertyValuesHolder holder1 = PropertyValuesHolder.ofKeyframe("rotation",keyframe1,keyframe2,keyframe3);
         final ObjectAnimator animator1 = ObjectAnimator.ofPropertyValuesHolder(tv,holder1);
@@ -45,7 +53,13 @@ public class UI2Activity extends AppCompatActivity {
             }
         });
 
-
+        tv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv1.animate().scaleX(2);
+                tv2.animate().scaleXBy(2);
+            }
+        });
 
 
     }
